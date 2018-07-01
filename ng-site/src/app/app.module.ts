@@ -1,8 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SpTreeviewModule } from "sp-treeview-v2";
+
 
 import { AppComponent } from './app.component';
+import { MatIconModule, MatCheckboxModule, MatRadioModule, MatProgressBarModule } from '@angular/material';
 
 
 @NgModule({
@@ -11,7 +14,12 @@ import { AppComponent } from './app.component';
   ],
   imports: [
     BrowserModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatIconModule,
+    MatCheckboxModule,
+    MatRadioModule,
+    MatProgressBarModule,
+    SpTreeviewModule
   ],
   providers: [],
   bootstrap: [AppComponent]
