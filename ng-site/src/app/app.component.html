@@ -1,11 +1,10 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row>
-    <span>srjn45</span>
+    <span>srjn45&nbsp;&nbsp;</span>
+    <button mat-button>sp-treeview</button>
     <span class="spacer"></span>
     <!-- <mat-icon class="example-icon">favorite</mat-icon> -->
   </mat-toolbar-row>
 </mat-toolbar>
 
-<sp-treeview-dropdown [placeholder]="'placeholder'" [nodes]="nodes" [config]="config" (delete)="onDelete($event)" (addChild)="onAddChild($event)"
-  (loadChildren)="onLoadChildren($event)" (change)="onChange($event)">
-</sp-treeview-dropdown>
+<router-outlet></router-outlet>

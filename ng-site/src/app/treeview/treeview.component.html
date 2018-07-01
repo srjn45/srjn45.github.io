@@ -1,0 +1,49 @@
+<!-- <sp-treeview-dropdown [placeholder]="'placeholder'" [nodes]="nodes" [config]="config" (delete)="onDelete($event)" (addChild)="onAddChild($event)"
+  (loadChildren)="onLoadChildren($event)" (change)="onChange($event)">
+</sp-treeview-dropdown> -->
+
+<mat-tab-group>
+  <mat-tab label="Search Treeview">
+    <sp-treeview [nodes]="nodes" [config]="simpleConfig" (loadChildren)="onLoadChildren($event)"></sp-treeview>
+  </mat-tab>
+  <mat-tab label="Input Treeview">
+    <div style="width: calc(100% - 40px)">
+      <sp-treeview-dropdown [nodes]="nodes" [config]="config" (loadChildren)="onLoadChildren($event)"></sp-treeview-dropdown>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <sp-treeview-overlay [nodes]="nodes" [config]="config" (loadChildren)="onLoadChildren($event)"></sp-treeview-overlay>
+    </div>
+  </mat-tab>
+  <mat-tab label="Tree with Radio">
+    <div>
+      <strong>Selected Nodes : </strong>{{selectedNodes}}
+    </div>
+    <sp-treeview [nodes]="nodes" [config]="radioConfig" (change)="onChange($event)" (loadChildren)="onLoadChildren($event)"></sp-treeview>
+  </mat-tab>
+  <mat-tab label="Tree with Checkbox">
+    <div>
+      <strong>Selected Nodes : </strong>{{selectedNodes}}
+    </div>
+    <sp-treeview [nodes]="nodes" [config]="checkboxConfig" (change)="onChange($event)" (loadChildren)="onLoadChildren($event)"></sp-treeview>
+  </mat-tab>
+  <mat-tab label="Add Child">
+    <div *ngIf="addForm">
+      <form #addChildForm="ngForm" (ngSubmit)="onAddChildSubmit(addChildForm)">
+        <mat-form-field>
+          <input matInput placeholder="Node Name" name="name" ngModel>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Node Value" name="value" ngModel>
+        </mat-form-field>
+        <button type="submit" mat-raised-button color="primary">Add Child</button>
+      </form>
+    </div>
+    <sp-treeview [nodes]="nodes" [config]="addChildConfig" (addChild)="onAddChild($event)" (loadChildren)="onLoadChildren($event)"></sp-treeview>
+  </mat-tab>
+  <mat-tab label="Delete Node">
+    <sp-treeview [nodes]="nodes" [config]="deleteConfig" (delete)="onDelete($event)" (loadChildren)="onLoadChildren($event)"></sp-treeview>
+  </mat-tab>
+</mat-tab-group>
