@@ -5,7 +5,7 @@ import { SpTreeviewModule } from "sp-treeview-v2";
 // import { SpTreeviewModule } from "sp-treeview";
 
 import { AppComponent } from './app.component';
-import { MatIconModule, MatCheckboxModule, MatRadioModule, MatProgressBarModule } from '@angular/material';
+import { MatIconModule, MatCheckboxModule, MatRadioModule, MatProgressBarModule, MatToolbar, MatToolbarModule } from '@angular/material';
 
 
 @NgModule({
@@ -19,6 +19,7 @@ import { MatIconModule, MatCheckboxModule, MatRadioModule, MatProgressBarModule 
     MatCheckboxModule,
     MatRadioModule,
     MatProgressBarModule,
+    MatToolbarModule,
     SpTreeviewModule
   ],
   providers: [],
