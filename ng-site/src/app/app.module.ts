@@ -46,7 +46,7 @@ const material = [
     material,
     FormsModule,
     SpTreeviewModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes, { useHash: true })
   ],
   providers: [],
   bootstrap: [AppComponent]
