@@ -182,7 +182,7 @@ MIT
 MIT
 MIT
 
-sp-treeview-v2@2.1.1
+sp-treeview-v2@2.1.2
 MIT
 MIT License
 
