@@ -48,7 +48,7 @@ export class TreeviewComponent implements OnInit {
   parent: Node;
 
   constructor() {
-    this.nodes = this._dataSource.filter(d => d.parent === '0').map(d => d.node);
+    this.nodes = Node.toNodeArray(this._dataSource.filter(d => d.parent === '0').map(d => d.node));
   }
 
   ngOnInit() {
@@ -57,7 +57,7 @@ export class TreeviewComponent implements OnInit {
 
   onLoadChildren(node: Node) {
     setTimeout(() => {
-      node.children = this._dataSource.filter(d => d.parent === node.value).map(d => d.node);
+      node.loadChildren(Node.toNodeArray(this._dataSource.filter(d => d.parent === node.value).map(d => d.node)));
     }, 2000);
   }
 
