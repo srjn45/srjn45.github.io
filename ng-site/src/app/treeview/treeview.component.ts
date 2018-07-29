@@ -16,12 +16,12 @@ export class TreeviewComponent implements OnInit {
   public UNCHECKED = UNCHECKED;
   public INDETERMINATE = INDETERMINATE;
 
-  config = new Config(new TreeLevelConfig(false, SELECT_CHECKBOX, true, true, true));
-  simpleConfig = new Config(new TreeLevelConfig(true, SELECT_NONE, false, false, true));
-  radioConfig = new Config(new TreeLevelConfig(true, SELECT_RADIO, false, false, false));
-  checkboxConfig = new Config(new TreeLevelConfig(true, SELECT_CHECKBOX, false, false, false));
-  addChildConfig = new Config(new TreeLevelConfig(true, SELECT_NONE, false, true, false));
-  deleteConfig = new Config(new TreeLevelConfig(true, SELECT_NONE, true, false, false));
+  config = new Config(new TreeLevelConfig(false, true, SELECT_CHECKBOX, true, true, true));
+  simpleConfig = new Config(new TreeLevelConfig(true, true, SELECT_NONE, false, false, true));
+  radioConfig = new Config(new TreeLevelConfig(true, true, SELECT_RADIO, false, false, false));
+  checkboxConfig = new Config(new TreeLevelConfig(true, true, SELECT_CHECKBOX, false, false, false));
+  addChildConfig = new Config(new TreeLevelConfig(true, true, SELECT_NONE, false, true, false));
+  deleteConfig = new Config(new TreeLevelConfig(true, true, SELECT_NONE, true, false, false));
   nodes: Node[] = [];
 
   _dataSource = [

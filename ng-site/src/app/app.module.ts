@@ -6,23 +6,17 @@ import { SpTreeviewModule } from "sp-treeview-v2";
 
 
 import { AppComponent } from './app.component';
-import { MatIconModule, MatCheckboxModule, MatRadioModule, MatProgressBarModule, MatToolbar, MatToolbarModule, MatButtonModule, MatTabsModule, MatSelectModule, MatFormFieldModule, MatInputModule } from '@angular/material';
+import { MatIconModule, MatCheckboxModule, MatRadioModule, MatProgressBarModule, MatToolbar, MatToolbarModule, MatButtonModule, MatTabsModule, MatSelectModule, MatFormFieldModule, MatInputModule, MatCardModule } from '@angular/material';
 import { TreeviewComponent } from './treeview/treeview.component';
 import { FormsModule } from '@angular/forms';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/sp-treeview', pathMatch: 'full' },
   { path: 'sp-treeview', component: TreeviewComponent }
-  // { path: 'hero/:id',      component: HeroDetailComponent },
-  // {
-  //   path: 'heroes',
-  //   component: HeroListComponent,
-  //   data: { title: 'Heroes List' }
-  // },
-  // { path: '**', component: PageNotFoundComponent }
 ];
 
 const material = [
+  MatCardModule,
   MatIconModule,
   MatCheckboxModule,
   MatRadioModule,
