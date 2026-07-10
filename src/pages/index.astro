@@ -82,6 +82,16 @@ const work = [
     detail:
       "I authored the RFC to split promotions into two first-class domains — ProductPromotions and CheckoutPromotions — redesigned the schema, and introduced three purpose-built, indexed APIs. I ran it as a phased, fully backward-compatible migration: dual-writing old and new models before cutover, moving promo-to-product matching server-side to retire the client SDK, and caching the hot storewall path. Cutting latency this far let promotions graduate from a best-effort tier-2 dependency — dropped on timeout — to a reliable service shown to every user.",
   },
+  {
+    name: 'In-Store Promotions Ingestion',
+    role: 'Staff Engineer — RFC author, design & delivery',
+    stack: ['Java', 'Kafka', 'S3', 'MySQL', 'Async workers'],
+    metric: '2 p.m. backlog → <10 min at peak',
+    summary:
+      'Large grocery partners run flat-price deals on thousands of individual products daily, but there was no practical way to model them — the portal required a separate form per product, so those deals never reached the app and customers went in-store for them, leaving store and app prices inconsistent.',
+    detail:
+      'I authored the RFC for a public bulk-ingestion API: partners push their entire promotion list in one call, a thin synchronous front persists it to S3, emits a Kafka event, and returns a job ID, while a horizontally scalable async worker pool validates and creates the promotions. The real bottleneck was the per-product conflict check — a heavy multi-table join that fell over at thousands of promotions — which I re-architected onto a purpose-built denormalized, composite-indexed table written transactionally with the source of truth. End-to-end ingestion dropped from an afternoon-long backlog (8 a.m. submissions live at 2 p.m.) to under 10 minutes even at peak, keeping the app in sync with in-store pricing.',
+  },
 ];
 
 const career = [
