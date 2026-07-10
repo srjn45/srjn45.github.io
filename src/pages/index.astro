@@ -65,18 +65,16 @@ const projects = [
   },
 ];
 
-// Professional work — resume-style. Each entry names my role and the impact.
-// Add `metric` for a headline stat; add richer detail as I write each up.
+// Professional work — problem-and-impact focused. Each entry names my role and
+// what shipped. Add `metric` for a headline stat; add `detail` for the deeper story.
 const work = [
   {
     name: 'Promotions Retrieval Redesign',
-    company: 'Glovo',
-    period: '2024 — 2025',
     role: 'Staff Engineer — end-to-end owner, RFC author & technical lead',
     stack: ['Java', 'MySQL', 'Kafka', 'Redis', 'Domain-driven design'],
     metric: '300ms p95 → 20ms p99',
     summary:
-      "Glovo served product-level deals (BOGO, % off) and checkout-level deals (free delivery, service-fee discounts) through one generalized model and a single API that returned every promotion for a list of stores — so the storewall loaded ~200 stores just to show two badges each, and catalog views fetched all promos up front, leaning on a client SDK to match promos to products that slowed every client release.",
+      "Product-level deals (BOGO, % off) and checkout-level deals (free delivery, service-fee discounts) were served through one generalized model and a single API that returned every promotion for a list of stores — so the storewall loaded ~200 stores just to show two badges each, and catalog views fetched all promos up front, leaning on a client SDK to match promos to products that slowed every client release.",
     detail:
       "I authored the RFC to split promotions into two first-class domains — ProductPromotions and CheckoutPromotions — redesigned the schema, and introduced three purpose-built, indexed APIs. I ran it as a phased, fully backward-compatible migration: dual-writing old and new models before cutover, moving promo-to-product matching server-side to retire the client SDK, and caching the hot storewall path. Cutting latency this far let promotions graduate from a best-effort tier-2 dependency — dropped on timeout — to a reliable service shown to every user.",
   },
@@ -191,10 +189,6 @@ const skills = [
               <div class="work-head">
                 <h3>{w.name}</h3>
                 {w.metric && <span class="metric">{w.metric}</span>}
-              </div>
-              <div class="work-meta">
-                <span class="work-company">{w.company}</span>
-                <span class="work-period">{w.period}</span>
               </div>
               <p class="work-role">{w.role}</p>
               <p>{w.summary}</p>
@@ -424,10 +418,7 @@ const skills = [
     color: var(--accent); background: var(--accent-soft);
     border-radius: 999px; padding: 0.2rem 0.7rem;
   }
-  .work-meta { display: flex; gap: 0.7rem; align-items: baseline; margin: 0.25rem 0 0.5rem; }
-  .work-company { font-weight: 650; font-size: 0.95rem; }
-  .work-period { font-size: 0.82rem; color: var(--accent); font-family: ui-monospace, monospace; }
-  .work-role { color: var(--text); font-weight: 500; font-size: 0.92rem; margin: 0 0 0.6rem; }
+  .work-role { color: var(--text); font-weight: 500; font-size: 0.92rem; margin: 0.35rem 0 0.6rem; }
   .work-item p { color: var(--muted); font-size: 0.94rem; margin: 0 0 0.7rem; }
   .work-detail { border-top: 1px solid var(--border); padding-top: 0.7rem; }
   .work-item .tags { margin-top: 0.2rem; }
