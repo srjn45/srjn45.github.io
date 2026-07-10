@@ -80,51 +80,6 @@ const work = [
     detail:
       "I authored the RFC to split promotions into two first-class domains — ProductPromotions and CheckoutPromotions — redesigned the schema, and introduced three purpose-built, indexed APIs. I ran it as a phased, fully backward-compatible migration: dual-writing old and new models before cutover, moving promo-to-product matching server-side to retire the client SDK, and caching the hot storewall path. Cutting latency this far let promotions graduate from a best-effort tier-2 dependency — dropped on timeout — to a reliable service shown to every user.",
   },
-  {
-    name: 'Offline Promotions Ingestion',
-    company: 'Glovo',
-    period: '2023 — 2024',
-    role: 'Staff Engineer — design & delivery',
-    stack: ['Java', 'Kafka', 'SQS', 'S3', 'Redis'],
-    summary:
-      'Enabled partners to run their in-store promotions on Glovo by building a real-time ingestion pipeline that keeps promotions in sync — ingesting millions of promotions daily and opening a new partner channel.',
-  },
-  {
-    name: 'Discovery & Search Relevancy Platform',
-    company: 'Gojek',
-    period: '2021 — 2023',
-    role: 'Technical Lead — platform owner',
-    stack: ['Go', 'Java', 'MongoDB', 'ElasticSearch', 'Kafka', 'Redis'],
-    summary:
-      'Owned the relevancy platform that let product and business teams push targeted content across merchants, promotions, and vouchers, giving users better visibility over the catalog to drive engagement and retention.',
-  },
-  {
-    name: 'Order History',
-    company: 'Gojek',
-    period: '2020 — 2021',
-    role: 'Technical Lead — service owner',
-    stack: ['Go', 'Java', 'Postgres', 'Kafka', 'Redis'],
-    summary:
-      'Built the service that serves live order status alongside historical order data as a single source of truth across all payment methods and product types.',
-  },
-  {
-    name: 'Jago Digital-Bank Integration',
-    company: 'Gojek',
-    period: '2020 — 2021',
-    role: 'Technical Lead — integration lead & cross-org partner',
-    stack: ['Java', 'Postgres', 'Kafka', 'Redis'],
-    summary:
-      "Led integration with a digital bank to add user-level account linking within GoPay, partnering directly with Jago's product owners to define the solution and adding a new payment source for users.",
-  },
-  {
-    name: 'Loyalty Processing Engine (C-Store)',
-    company: 'Infobeans',
-    period: '2017 — 2018',
-    role: 'Software Engineer — core engine',
-    stack: ['Java', 'Spring Boot', 'Oracle', 'MyBatis'],
-    summary:
-      'Built the reward-scoring and redemption engine at the heart of a Loyalty-Program-as-a-Service for the petroleum and convenience-store industry (Verifone & PCI-DSS certified).',
-  },
 ];
 
 const career = [
