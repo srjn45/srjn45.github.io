@@ -197,30 +197,6 @@ const skills = [
         </div>
       </section>
 
-      <!-- Professional work -->
-      <section id="experience">
-        <h2><span class="accent">/</span> Professional work</h2>
-        <p class="section-sub">
-          Systems I've owned at consumer scale — the problem, my role, and what shipped.
-        </p>
-        <div class="work-list">
-          {work.map((w) => (
-            <article class="work-item">
-              <div class="work-head">
-                <h3>{w.name}</h3>
-                {w.metric && <span class="metric">{w.metric}</span>}
-              </div>
-              <p class="work-role">{w.role}</p>
-              <p>{w.summary}</p>
-              {w.detail && <p class="work-detail">{w.detail}</p>}
-              <div class="tags">
-                {w.stack.map((t) => <span class="tag">{t}</span>)}
-              </div>
-            </article>
-          ))}
-        </div>
-      </section>
-
       <!-- Projects grid -->
       <section id="projects">
         <h2><span class="accent">/</span> Side projects</h2>
@@ -300,6 +276,30 @@ const skills = [
                 {s.items.map((i) => <span class="tag">{i}</span>)}
               </div>
             </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- Professional work -->
+      <section id="experience">
+        <h2><span class="accent">/</span> Professional work</h2>
+        <p class="section-sub">
+          Systems I've owned at consumer scale — the problem, my role, and what shipped.
+        </p>
+        <div class="work-list">
+          {work.map((w) => (
+            <article class="work-item">
+              <div class="work-head">
+                <h3>{w.name}</h3>
+                {w.metric && <span class="metric">{w.metric}</span>}
+              </div>
+              <p class="work-role">{w.role}</p>
+              <p>{w.summary}</p>
+              {w.detail && <p class="work-detail">{w.detail}</p>}
+              <div class="tags">
+                {w.stack.map((t) => <span class="tag">{t}</span>)}
+              </div>
+            </article>
           ))}
         </div>
       </section>
