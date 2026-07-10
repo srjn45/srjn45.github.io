@@ -26,42 +26,46 @@ const featured = {
   ],
 };
 
+// Each card's title/body opens `site` if present, else `github`.
+// A GitHub button in the bottom-right corner always opens `github`.
 const projects = [
   {
     name: 'warden',
     desc: 'Run a fleet of AI coding agents from one cockpit — a single Go binary that spawns, monitors, and tears them down in isolated git worktrees.',
     lang: 'Go',
-    url: 'https://github.com/srjn45/warden',
+    github: 'https://github.com/srjn45/warden',
+    site: 'https://srjn45.github.io/warden/',
   },
   {
     name: 'spaiSH',
     desc: 'Experimental AI shell assistant — ask questions, get shell commands, run an autonomous agent loop in your terminal.',
     lang: 'Go',
-    url: 'https://github.com/srjn45/spaiSH',
+    github: 'https://github.com/srjn45/spaiSH',
+    site: 'https://srjn45.github.io/spaiSH/',
   },
   {
     name: 'FileDBv2',
     desc: 'Lightweight, embeddable, local-first database — single binary, NDJSON storage, gRPC/REST API, full CLI.',
     lang: 'Go',
-    url: 'https://github.com/srjn45/FileDBv2',
+    github: 'https://github.com/srjn45/FileDBv2',
   },
   {
     name: 'sp-treeview',
     desc: 'Material-design tree view component for Angular, published on npm.',
     lang: 'TypeScript',
-    url: 'https://github.com/srjn45/sp-treeview',
+    github: 'https://github.com/srjn45/sp-treeview',
   },
   {
     name: 'pocket-money',
     desc: 'Family-oriented chore tracking and pocket-money app — parents define and approve chores, kids log them and track their earnings and payouts.',
     lang: 'Go · React Native',
-    url: 'https://github.com/srjn45/pocket-money',
+    github: 'https://github.com/srjn45/pocket-money',
   },
   {
     name: 'expense-manager',
     desc: 'Web-first expense ledger — categories, tags, and payment methods with charts for monthly, category, and tag-based spend.',
     lang: 'Python · React',
-    url: 'https://github.com/srjn45/expense-manager',
+    github: 'https://github.com/srjn45/expense-manager',
   },
 ];
 
@@ -215,13 +219,30 @@ const skills = [
         </p>
         <div class="grid">
           {projects.map((p) => (
-            <a class="card" href={p.url} target="_blank" rel="noopener">
+            <div class="card">
+              <a
+                class="card-link"
+                href={p.site ?? p.github}
+                target="_blank"
+                rel="noopener"
+                aria-label={`Open ${p.name}`}
+              ></a>
               <div class="card-head">
                 <h3>{p.name}</h3>
                 <span class="lang">{p.lang}</span>
               </div>
               <p>{p.desc}</p>
-            </a>
+              <a
+                class="gh-btn"
+                href={p.github}
+                target="_blank"
+                rel="noopener"
+                aria-label={`${p.name} on GitHub`}
+              >
+                <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg>
+                <span>GitHub</span>
+              </a>
+            </div>
           ))}
         </div>
       </section>
@@ -395,14 +416,26 @@ const skills = [
 
   .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 1rem; }
   .card {
+    position: relative;
     background: var(--card); border: 1px solid var(--border);
-    border-radius: 14px; padding: 1.1rem 1.2rem; color: var(--text);
+    border-radius: 14px; padding: 1.1rem 1.2rem 3rem; color: var(--text);
     transition: border-color 0.15s ease, transform 0.15s ease;
   }
-  .card:hover { border-color: var(--accent); text-decoration: none; transform: translateY(-2px); }
+  .card:hover { border-color: var(--accent); transform: translateY(-2px); }
+  /* Stretched primary link — makes the whole card clickable to the site/repo. */
+  .card-link { position: absolute; inset: 0; z-index: 1; border-radius: inherit; }
   .card-head { display: flex; justify-content: space-between; align-items: baseline; gap: 0.6rem; }
   .card h3 { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 1.05rem; }
   .card p { color: var(--muted); font-size: 0.92rem; margin: 0.4rem 0 0; }
+  .gh-btn {
+    position: absolute; z-index: 2; right: 1rem; bottom: 0.9rem;
+    display: inline-flex; align-items: center; gap: 0.35rem;
+    font-size: 0.78rem; color: var(--muted);
+    background: var(--bg-soft); border: 1px solid var(--border);
+    border-radius: 8px; padding: 0.25rem 0.55rem;
+  }
+  .gh-btn:hover { color: var(--accent); border-color: var(--accent); text-decoration: none; }
+  .gh-btn svg { width: 14px; height: 14px; fill: currentColor; }
   .lang {
     font-size: 0.75rem; color: var(--accent);
     background: var(--accent-soft); border-radius: 999px; padding: 0.1rem 0.6rem;
