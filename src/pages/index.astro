@@ -1,0 +1,401 @@
+---
+// Single-page portfolio. All content lives in the data blocks below —
+// edit these, not the markup.
+
+const profile = {
+  name: 'Srajan Pathak',
+  role: 'Staff Software Engineer',
+  tagline:
+    'Ten+ years building backend systems — and lately, the tooling for running fleets of AI coding agents.',
+  github: 'https://github.com/srjn45',
+  linkedin: 'https://www.linkedin.com/in/srajan-pathak-9938b055',
+  email: 'srajanpathak45@gmail.com',
+};
+
+const featured = {
+  name: 'warden',
+  gif: 'https://srjn45.github.io/warden/media/hero.gif',
+  tagline: 'Run a fleet of AI coding agents from one cockpit.',
+  desc:
+    'A single Go binary that spawns, monitors, and tears down coding agents — each in an isolated git worktree — with real dollar cost tracking, a tmux TUI + embedded web dashboard, and MCP tools so one agent can orchestrate the rest. Self-hosted, no database, no telemetry.',
+  tags: ['Go', 'MCP', 'tmux', 'Astro', 'self-hosted'],
+  links: [
+    { label: 'GitHub', url: 'https://github.com/srjn45/warden' },
+    { label: 'Docs', url: 'https://srjn45.github.io/warden/' },
+    { label: 'Why I built it', url: 'https://srjn45.github.io/warden/blog/running-a-fleet-of-claude-code-agents/' },
+  ],
+};
+
+const projects = [
+  {
+    name: 'spaiSH',
+    desc: 'Experimental AI shell assistant — ask questions, get shell commands, run an autonomous agent loop in your terminal.',
+    lang: 'Go',
+    url: 'https://github.com/srjn45/spaiSH',
+  },
+  {
+    name: 'spaiOS',
+    desc: 'A floating, screen-aware AI overlay for Ubuntu. Local inference via Ollama — no cloud.',
+    lang: 'Python',
+    url: 'https://github.com/srjn45/spaiOS',
+  },
+  {
+    name: 'FileDBv2',
+    desc: 'Lightweight, embeddable, local-first database — single binary, NDJSON storage, gRPC/REST API, full CLI.',
+    lang: 'Go',
+    url: 'https://github.com/srjn45/FileDBv2',
+  },
+  {
+    name: 'kafka-retry-dlq',
+    desc: 'Java library providing retry and dead-letter-queue mechanics for Kafka consumers.',
+    lang: 'Java',
+    url: 'https://github.com/srjn45/kafka-retry-dlq',
+  },
+  {
+    name: 'bulwark',
+    desc: 'Hystrix-style fault tolerance for Clojurists — circuit breakers for the JVM, the functional way.',
+    lang: 'Clojure',
+    url: 'https://github.com/srjn45/bulwark',
+  },
+  {
+    name: 'sp-treeview',
+    desc: 'Material-design tree view component for Angular, published on npm.',
+    lang: 'TypeScript',
+    url: 'https://github.com/srjn45/sp-treeview',
+  },
+];
+
+// Adjust dates / add company names as you like — rendered as role + period only.
+const career = [
+  {
+    role: 'Staff Software Engineer',
+    period: '2023 — present',
+    desc: 'Owning system design end to end — high-level architecture and low-level design, weighing trade-offs across services, data stores, and teams. Mentoring engineers and setting technical direction.',
+  },
+  {
+    role: 'Tech Lead',
+    period: '2021 — 2023',
+    desc: 'Led backend teams through design, delivery, and operations of distributed services.',
+  },
+  {
+    role: 'Backend Engineer → Senior Engineer',
+    period: '2014 — 2021',
+    desc: 'Built and ran production backend systems across a wide spectrum of stacks and domains.',
+  },
+];
+
+const skills = [
+  { group: 'Languages', items: ['Go', 'Java', 'Clojure', 'Python', 'Kotlin', 'TypeScript'] },
+  { group: 'Data & messaging', items: ['PostgreSQL', 'MySQL', 'MongoDB', 'Redis', 'Kafka', 'RabbitMQ'] },
+  { group: 'Focus areas', items: ['System design (HLD & LLD)', 'Distributed systems', 'Developer tooling', 'AI agent infrastructure'] },
+];
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{profile.name} — {profile.role}</title>
+    <meta name="description" content={profile.tagline} />
+    <meta property="og:title" content={`${profile.name} — ${profile.role}`} />
+    <meta property="og:description" content={profile.tagline} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://srjn45.github.io/" />
+  </head>
+  <body>
+    <nav>
+      <a class="brand" href="#top">SP</a>
+      <div class="nav-links">
+        <a href="#featured">Work</a>
+        <a href="#projects">Projects</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+        <a href={profile.github} target="_blank" rel="noopener">GitHub ↗</a>
+      </div>
+    </nav>
+
+    <main id="top">
+      <!-- Hero -->
+      <section class="hero">
+        <p class="kicker">Hi, I'm</p>
+        <h1>{profile.name}</h1>
+        <p class="role">{profile.role}</p>
+        <p class="tagline">{profile.tagline}</p>
+        <p class="hero-sub">
+          I think in systems — high-level architecture down to low-level design, and the
+          trade-offs in between. On nights and weekends I build developer tools; the current
+          obsession is infrastructure for AI coding agents.
+        </p>
+        <div class="cta">
+          <a class="btn primary" href="#featured">See my work ↓</a>
+          <a class="btn" href={profile.linkedin} target="_blank" rel="noopener">LinkedIn</a>
+          <a class="btn" href={`mailto:${profile.email}`}>Email me</a>
+        </div>
+      </section>
+
+      <!-- Featured project -->
+      <section id="featured">
+        <h2><span class="accent">/</span> Featured — what I'm building now</h2>
+        <div class="featured-card">
+          <a href={featured.links[0].url} target="_blank" rel="noopener" class="featured-media">
+            <img src={featured.gif} alt="warden: a cockpit for a fleet of AI coding agents" loading="lazy" />
+          </a>
+          <div class="featured-body">
+            <h3>{featured.name}</h3>
+            <p class="featured-tagline">{featured.tagline}</p>
+            <p>{featured.desc}</p>
+            <div class="tags">
+              {featured.tags.map((t) => <span class="tag">{t}</span>)}
+            </div>
+            <div class="links">
+              {featured.links.map((l) => (
+                <a href={l.url} target="_blank" rel="noopener">{l.label} ↗</a>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Projects grid -->
+      <section id="projects">
+        <h2><span class="accent">/</span> Side projects</h2>
+        <p class="section-sub">
+          Built for fun, across the stack — from JVM fault tolerance to local-first databases
+          to AI experiments that led to warden.
+        </p>
+        <div class="grid">
+          {projects.map((p) => (
+            <a class="card" href={p.url} target="_blank" rel="noopener">
+              <div class="card-head">
+                <h3>{p.name}</h3>
+                <span class="lang">{p.lang}</span>
+              </div>
+              <p>{p.desc}</p>
+            </a>
+          ))}
+        </div>
+      </section>
+
+      <!-- About / experience -->
+      <section id="about">
+        <h2><span class="accent">/</span> About</h2>
+        <div class="about-cols">
+          <div class="about-prose">
+            <p>
+              I've spent 10+ years in backend engineering — the last several as a tech lead and
+              then staff engineer. The part of the job I enjoy most is system design: mapping a
+              messy problem into services, data models, and failure modes, and being able to
+              argue the trade-offs at both the whiteboard level and the code level.
+            </p>
+            <p>
+              I've worked across a wide spectrum of technologies rather than one stack —
+              JVM services in Java, Kotlin and Clojure, systems tooling in Go, data pipelines
+              over Kafka and RabbitMQ, and storage from Postgres to Redis to MongoDB.
+            </p>
+            <p>
+              Recently I've been deep in AI-assisted development. After building spaiOS and
+              spaiSH to explore the space, I landed on warden — and building it with fleets of
+              AI agents (managed by warden itself) has been the fastest I've ever taken an idea
+              from sketch to a mature, released tool.
+            </p>
+          </div>
+          <ol class="timeline">
+            {career.map((c) => (
+              <li>
+                <div class="t-role">{c.role}</div>
+                <div class="t-period">{c.period}</div>
+                <p>{c.desc}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+        <div class="skills">
+          {skills.map((s) => (
+            <div class="skill-group">
+              <h4>{s.group}</h4>
+              <div class="tags">
+                {s.items.map((i) => <span class="tag">{i}</span>)}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- Contact -->
+      <section id="contact" class="contact">
+        <h2><span class="accent">/</span> Get in touch</h2>
+        <p>
+          Open to interesting problems, systems to design, and conversations about agent
+          tooling. The fastest way to reach me:
+        </p>
+        <div class="cta">
+          <a class="btn primary" href={`mailto:${profile.email}`}>{profile.email}</a>
+          <a class="btn" href={profile.github} target="_blank" rel="noopener">GitHub</a>
+          <a class="btn" href={profile.linkedin} target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>© {new Date().getFullYear()} {profile.name} · Built with Astro · <a href="https://github.com/srjn45/srjn45.github.io" target="_blank" rel="noopener">source</a></p>
+    </footer>
+  </body>
+</html>
+
+<style>
+  :root {
+    --bg: #0b1020;
+    --bg-soft: #11182e;
+    --card: #131c36;
+    --border: #24304f;
+    --text: #dbe4f5;
+    --muted: #8ea0c0;
+    --accent: #2dd4bf;
+    --accent-soft: rgba(45, 212, 191, 0.12);
+  }
+  @media (prefers-color-scheme: light) {
+    :root {
+      --bg: #f8fafc;
+      --bg-soft: #eef2f7;
+      --card: #ffffff;
+      --border: #dbe3ee;
+      --text: #16213a;
+      --muted: #5b6b85;
+      --accent: #0d9488;
+      --accent-soft: rgba(13, 148, 136, 0.1);
+    }
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  main { max-width: 960px; margin: 0 auto; padding: 0 1.5rem; }
+  section { padding: 4.5rem 0 1rem; }
+  h1, h2, h3, h4 { line-height: 1.2; margin: 0 0 0.6rem; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  nav {
+    position: sticky; top: 0; z-index: 10;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 0.9rem 1.5rem;
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+  }
+  .brand {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-weight: 700; font-size: 1.05rem;
+    color: var(--accent); border: 1.5px solid var(--accent);
+    border-radius: 8px; padding: 0.1rem 0.5rem;
+  }
+  .brand:hover { background: var(--accent-soft); text-decoration: none; }
+  .nav-links { display: flex; gap: 1.4rem; }
+  .nav-links a { color: var(--muted); font-size: 0.95rem; }
+  .nav-links a:hover { color: var(--text); text-decoration: none; }
+
+  .hero { padding-top: 6rem; }
+  .kicker {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    color: var(--accent); margin: 0 0 0.4rem;
+  }
+  .hero h1 { font-size: clamp(2.4rem, 6vw, 3.6rem); letter-spacing: -0.02em; }
+  .role { font-size: clamp(1.2rem, 3vw, 1.6rem); color: var(--muted); font-weight: 600; margin: 0 0 1rem; }
+  .tagline { font-size: 1.15rem; max-width: 46rem; margin: 0 0 0.8rem; }
+  .hero-sub { color: var(--muted); max-width: 44rem; margin: 0 0 1.8rem; }
+
+  .cta { display: flex; gap: 0.8rem; flex-wrap: wrap; }
+  .btn {
+    display: inline-block; padding: 0.55rem 1.1rem;
+    border: 1px solid var(--border); border-radius: 10px;
+    color: var(--text); font-weight: 500; font-size: 0.95rem;
+    background: var(--card);
+  }
+  .btn:hover { border-color: var(--accent); text-decoration: none; }
+  .btn.primary { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+
+  h2 { font-size: 1.6rem; margin-bottom: 1.2rem; }
+  .accent { color: var(--accent); font-family: ui-monospace, monospace; }
+  .section-sub { color: var(--muted); margin: -0.6rem 0 1.4rem; max-width: 44rem; }
+
+  .featured-card {
+    display: grid; grid-template-columns: 1.15fr 1fr; gap: 1.6rem;
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 16px; padding: 1.6rem; align-items: center;
+  }
+  .featured-media img {
+    width: 100%; border-radius: 10px; border: 1px solid var(--border); display: block;
+  }
+  .featured-body h3 {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 1.5rem; color: var(--accent);
+  }
+  .featured-tagline { font-weight: 600; margin: 0 0 0.6rem; }
+  .featured-body p { color: var(--muted); }
+  .featured-tagline { color: var(--text) !important; }
+  .links { display: flex; gap: 1.2rem; margin-top: 0.9rem; font-weight: 500; }
+
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 1rem; }
+  .card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 14px; padding: 1.1rem 1.2rem; color: var(--text);
+    transition: border-color 0.15s ease, transform 0.15s ease;
+  }
+  .card:hover { border-color: var(--accent); text-decoration: none; transform: translateY(-2px); }
+  .card-head { display: flex; justify-content: space-between; align-items: baseline; gap: 0.6rem; }
+  .card h3 { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 1.05rem; }
+  .card p { color: var(--muted); font-size: 0.92rem; margin: 0.4rem 0 0; }
+  .lang {
+    font-size: 0.75rem; color: var(--accent);
+    background: var(--accent-soft); border-radius: 999px; padding: 0.1rem 0.6rem;
+    white-space: nowrap;
+  }
+
+  .about-cols { display: grid; grid-template-columns: 1.2fr 1fr; gap: 2.5rem; }
+  .about-prose p { margin: 0 0 1rem; color: var(--muted); }
+  .about-prose p:first-child { color: var(--text); }
+
+  .timeline { list-style: none; margin: 0; padding: 0; border-left: 2px solid var(--border); }
+  .timeline li { position: relative; padding: 0 0 1.6rem 1.4rem; }
+  .timeline li::before {
+    content: ''; position: absolute; left: -7px; top: 0.35rem;
+    width: 12px; height: 12px; border-radius: 50%;
+    background: var(--bg); border: 2.5px solid var(--accent);
+  }
+  .t-role { font-weight: 650; }
+  .t-period { font-size: 0.85rem; color: var(--accent); font-family: ui-monospace, monospace; margin: 0.1rem 0 0.3rem; }
+  .timeline p { color: var(--muted); font-size: 0.92rem; margin: 0; }
+
+  .skills { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.4rem; margin-top: 2.2rem; }
+  .skill-group h4 { color: var(--muted); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.06em; }
+  .tags { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-top: 0.5rem; }
+  .tag {
+    font-size: 0.82rem; padding: 0.18rem 0.65rem; border-radius: 999px;
+    background: var(--bg-soft); border: 1px solid var(--border); color: var(--text);
+  }
+
+  .contact { padding-bottom: 4rem; }
+  .contact p { color: var(--muted); max-width: 40rem; }
+
+  footer {
+    border-top: 1px solid var(--border);
+    text-align: center; color: var(--muted); font-size: 0.85rem;
+    padding: 1.6rem 0;
+  }
+
+  @media (max-width: 760px) {
+    .featured-card, .about-cols { grid-template-columns: 1fr; }
+    .nav-links { gap: 0.9rem; }
+    .nav-links a:not(:last-child) { display: none; }
+    section { padding-top: 3.2rem; }
+    .hero { padding-top: 3.5rem; }
+  }
+</style>
