@@ -86,11 +86,11 @@ const work = [
     name: 'In-Store Promotions Ingestion',
     role: 'Staff Engineer — RFC author, design & delivery',
     stack: ['Java', 'Kafka', 'S3', 'MySQL', 'Async workers'],
-    metric: '2 p.m. backlog → <10 min at peak',
+    metric: '~6 hr lag → <10 min',
     summary:
       'Large grocery partners run flat-price deals on thousands of individual products daily, but there was no practical way to model them — the portal required a separate form per product, so those deals never reached the app and customers went in-store for them, leaving store and app prices inconsistent.',
     detail:
-      'I authored the RFC for a public bulk-ingestion API: partners push their entire promotion list in one call, a thin synchronous front persists it to S3, emits a Kafka event, and returns a job ID, while a horizontally scalable async worker pool validates and creates the promotions. The real bottleneck was the per-product conflict check — a heavy multi-table join that fell over at thousands of promotions — which I re-architected onto a purpose-built denormalized, composite-indexed table written transactionally with the source of truth. End-to-end ingestion dropped from an afternoon-long backlog (8 a.m. submissions live at 2 p.m.) to under 10 minutes even at peak, keeping the app in sync with in-store pricing.',
+      'I authored the RFC for a public bulk-ingestion API: partners push their entire promotion list in one call, a thin synchronous front persists it to S3, emits a Kafka event, and returns a job ID, while a horizontally scalable async worker pool validates and creates the promotions. The bottleneck was the per-product conflict check — a heavy multi-table join whose cost grew with the dataset, so lag compounded with every new partner. I re-architected it onto a purpose-built denormalized, composite-indexed table (written transactionally with the source of truth), turning each check from a linear scan into a near-constant index seek — so ingestion latency stopped scaling with partner count. End-to-end lag dropped from ~6 hours (8 a.m. submissions live at 2 p.m.) to under 10 minutes even at peak, keeping the app in sync with in-store pricing.',
   },
 ];
 
