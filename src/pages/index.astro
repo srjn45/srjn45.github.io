@@ -93,6 +93,16 @@ const work = [
     detail:
       'I authored the RFC for a public bulk-ingestion API: partners push their entire promotion list in one call, a thin synchronous front persists it to S3, emits a Kafka event, and returns a job ID, while a horizontally scalable async worker pool validates and creates the promotions. The bottleneck was the per-product conflict check — a heavy multi-table join whose cost grew with the dataset, so lag compounded with every new partner. I re-architected it onto a purpose-built denormalized, composite-indexed table (written transactionally with the source of truth), turning each check from a linear scan into a near-constant index seek — so ingestion latency stopped scaling with partner count. End-to-end lag dropped from ~6 hours (8 a.m. submissions live at 2 p.m.) to under 10 minutes even at peak, keeping the app in sync with in-store pricing.',
   },
+  {
+    name: 'Cross-Company Promotions Platform Migration',
+    role: 'Program lead — migration strategy & growth-platform delivery owner',
+    stack: ['Cross-org program', 'Phased migration', 'BFF', 'EU Omnibus', 'Stakeholder alignment'],
+    metric: '7 teams · 3 brands · 3 quarters',
+    summary:
+      'Following a group-wide consolidation onto a centralized promotions backend, the growth platform had to migrate without disrupting live deals — but this looked like a data migration and was not one: the target platform had feature and regulatory gaps, modeled some promotion types and not others, and every consumer surface (catalog, storewall, store view, pricing, checkout) was affected across three brands and roughly seven teams in two companies.',
+    detail:
+      'I owned the program end to end and led a four-engineer team on the growth-platform side. I turned an ambiguous "migrate everything" mandate into a phased, vertical-by-vertical plan — nothing moved big-bang, each capability migrated behind a fully working system and rolled out market by market. My team adapted the BFF layer to consume the new backend and support its promotion types, while I drove missing capabilities to be built on backend teams I did not own — including EU Omnibus price-transparency compliance, the regulatory blocker gating every European market. I ran a weekly lead sync across all seven teams, aligned PMs and EMs on both sides, and traveled on-site to unblock the hardest cross-company dependencies. We migrated eight promotion types across grocery and food and rolled out across every operating market with zero disruption to live promotions — surfacing and re-baselining each dependency delay transparently along the way.',
+  },
 ];
 
 const career = [
