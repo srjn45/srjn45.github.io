@@ -1,0 +1,47 @@
+---
+// Shared shell for every page — head, nav, footer, and global styles.
+// Pass `title`/`description` to override the defaults for a specific page.
+import { profile } from '../data/content.js';
+import '../styles/global.css';
+
+const {
+  title = `${profile.name} — ${profile.role}`,
+  description = profile.tagline,
+} = Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://srjn45.github.io/" />
+    <meta property="og:image" content="https://srjn45.github.io/og-image.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="https://srjn45.github.io/og-image.png" />
+  </head>
+  <body>
+    <nav>
+      <a class="brand" href="/">SP</a>
+      <div class="nav-links">
+        <a href="/#featured">Work</a>
+        <a href="/#projects">Projects</a>
+        <a href="/#about">About</a>
+        <a href="/#experience">Experience</a>
+        <a href="/#contact">Contact</a>
+        <a href={profile.github} target="_blank" rel="noopener">GitHub ↗</a>
+      </div>
+    </nav>
+
+    <slot />
+
+    <footer>
+      <p>© {new Date().getFullYear()} {profile.name} · Built with Astro · <a href="https://github.com/srjn45/srjn45.github.io" target="_blank" rel="noopener">source</a></p>
+    </footer>
+  </body>
+</html>

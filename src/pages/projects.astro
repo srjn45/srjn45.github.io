@@ -1,0 +1,24 @@
+---
+import Base from '../layouts/Base.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import { profile, projects } from '../data/content.js';
+---
+
+<Base
+  title={`Side projects — ${profile.name}`}
+  description="Every side project I've built for fun, across the stack."
+>
+  <main>
+    <section class="page-head">
+      <a class="back" href="/#projects">← Back to home</a>
+      <h1><span class="accent">/</span> Side projects</h1>
+      <p class="section-sub">
+        Everything I've built for fun, across the stack — from JVM fault tolerance to
+        local-first databases to the AI experiments that led to warden.
+      </p>
+      <div class="grid">
+        {projects.map((p) => <ProjectCard project={p} />)}
+      </div>
+    </section>
+  </main>
+</Base>

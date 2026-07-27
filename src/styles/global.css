@@ -1,0 +1,244 @@
+:root {
+  --bg: #0b1020;
+  --bg-soft: #11182e;
+  --card: #131c36;
+  --border: #24304f;
+  --text: #dbe4f5;
+  --muted: #8ea0c0;
+  --accent: #2dd4bf;
+  --accent-soft: rgba(45, 212, 191, 0.12);
+}
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg: #f8fafc;
+    --bg-soft: #eef2f7;
+    --card: #ffffff;
+    --border: #dbe3ee;
+    --text: #16213a;
+    --muted: #5b6b85;
+    --accent: #0d9488;
+    --accent-soft: rgba(13, 148, 136, 0.1);
+  }
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+main { max-width: 960px; margin: 0 auto; padding: 0 1.5rem; }
+section { padding: 4.5rem 0 1rem; }
+h1, h2, h3, h4 { line-height: 1.2; margin: 0 0 0.6rem; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+nav {
+  position: sticky; top: 0; z-index: 10;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 0.9rem 1.5rem;
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border);
+}
+.brand {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-weight: 700; font-size: 1.05rem;
+  color: var(--accent); border: 1.5px solid var(--accent);
+  border-radius: 8px; padding: 0.1rem 0.5rem;
+}
+.brand:hover { background: var(--accent-soft); text-decoration: none; }
+.nav-links { display: flex; gap: 1.4rem; }
+.nav-links a { color: var(--muted); font-size: 0.95rem; }
+.nav-links a:hover { color: var(--text); text-decoration: none; }
+
+.hero { padding-top: 6rem; }
+.kicker {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  color: var(--accent); margin: 0 0 0.4rem;
+}
+.hero h1 { font-size: clamp(2.4rem, 6vw, 3.6rem); letter-spacing: -0.02em; }
+.role { font-size: clamp(1.2rem, 3vw, 1.6rem); color: var(--muted); font-weight: 600; margin: 0 0 1rem; }
+.tagline { font-size: 1.15rem; max-width: 46rem; margin: 0 0 0.8rem; }
+.hero-sub { color: var(--muted); max-width: 44rem; margin: 0 0 1.8rem; }
+
+.cta { display: flex; gap: 0.8rem; flex-wrap: wrap; }
+.btn {
+  display: inline-block; padding: 0.55rem 1.1rem;
+  border: 1px solid var(--border); border-radius: 10px;
+  color: var(--text); font-weight: 500; font-size: 0.95rem;
+  background: var(--card);
+}
+.btn:hover { border-color: var(--accent); text-decoration: none; }
+.btn.primary { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+
+h2 { font-size: 1.6rem; margin-bottom: 1.2rem; }
+.accent { color: var(--accent); font-family: ui-monospace, monospace; }
+.section-sub { color: var(--muted); margin: -0.6rem 0 1.4rem; max-width: 44rem; }
+
+/* Section heading row — title on the left, a "See all" link on the right. */
+.section-head {
+  display: flex; justify-content: space-between; align-items: baseline;
+  gap: 1rem; flex-wrap: wrap;
+}
+.section-head h2 { margin-bottom: 0; }
+/* The sub's negative top-margin is tuned for a standalone h2; after a
+   section-head (h2 margin-bottom: 0) it would overlap, so restore a small gap. */
+.section-head + .section-sub { margin-top: 0.6rem; }
+.see-all {
+  font-size: 0.9rem; font-weight: 500; white-space: nowrap;
+  color: var(--accent);
+}
+.see-all:hover { text-decoration: underline; }
+
+.featured-card {
+  display: grid; grid-template-columns: 1.15fr 1fr; gap: 1.6rem;
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 16px; padding: 1.6rem; align-items: center;
+}
+.featured-media img {
+  width: 100%; border-radius: 10px; border: 1px solid var(--border); display: block;
+}
+.featured-body h3 {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 1.5rem; color: var(--accent);
+}
+.featured-tagline { font-weight: 600; margin: 0 0 0.6rem; }
+.featured-body p { color: var(--muted); }
+.featured-tagline { color: var(--text) !important; }
+.links { display: flex; gap: 1.2rem; margin-top: 0.9rem; font-weight: 500; }
+
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 1rem; }
+.card {
+  position: relative;
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 14px; padding: 1.1rem 1.2rem 3rem; color: var(--text);
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+.card:hover { border-color: var(--accent); transform: translateY(-2px); }
+/* Stretched primary link — makes the whole card clickable to the site/repo. */
+.card-link { position: absolute; inset: 0; z-index: 1; border-radius: inherit; }
+.card-head { display: flex; justify-content: space-between; align-items: baseline; gap: 0.6rem; }
+.card h3 { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 1.05rem; }
+.card p { color: var(--muted); font-size: 0.92rem; margin: 0.4rem 0 0; }
+.gh-btn {
+  position: absolute; z-index: 2; right: 1rem; bottom: 0.9rem;
+  display: inline-flex; align-items: center; gap: 0.35rem;
+  font-size: 0.78rem; color: var(--muted);
+  background: var(--bg-soft); border: 1px solid var(--border);
+  border-radius: 8px; padding: 0.25rem 0.55rem;
+}
+.gh-btn:hover { color: var(--accent); border-color: var(--accent); text-decoration: none; }
+.gh-btn svg { width: 14px; height: 14px; fill: currentColor; }
+.lang {
+  font-size: 0.75rem; color: var(--accent);
+  background: var(--accent-soft); border-radius: 999px; padding: 0.1rem 0.6rem;
+  white-space: nowrap;
+}
+
+/* Professional-work tiles — same card look, whole tile links to the detail page. */
+.work-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1rem; }
+.work-card {
+  position: relative; display: flex; flex-direction: column;
+  background: var(--card); border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: 14px; padding: 1.2rem 1.3rem; color: var(--text);
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+.work-card:hover { border-color: var(--accent); transform: translateY(-2px); text-decoration: none; }
+.work-card .work-head { display: flex; justify-content: space-between; align-items: baseline; gap: 0.7rem; flex-wrap: wrap; }
+.work-card h3 { font-size: 1.15rem; margin: 0; color: var(--text); }
+.work-card .metric {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.78rem; font-weight: 600; white-space: nowrap;
+  color: var(--accent); background: var(--accent-soft);
+  border-radius: 999px; padding: 0.15rem 0.6rem;
+}
+.work-card .one-liner { color: var(--muted); font-size: 0.92rem; margin: 0.6rem 0 0.9rem; }
+.work-card .more { margin-top: auto; font-size: 0.85rem; font-weight: 500; color: var(--accent); }
+
+/* Professional-work detail page. */
+.detail { max-width: 46rem; }
+.detail .back { display: inline-block; font-size: 0.9rem; margin-bottom: 1.5rem; }
+.detail h1 { font-size: clamp(1.8rem, 4vw, 2.4rem); letter-spacing: -0.01em; }
+.detail .detail-role { color: var(--text); font-weight: 500; margin: 0.3rem 0 0.8rem; }
+.detail .detail-metric {
+  display: inline-block;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.85rem; font-weight: 600;
+  color: var(--accent); background: var(--accent-soft);
+  border-radius: 999px; padding: 0.2rem 0.75rem; margin-bottom: 1.4rem;
+}
+.detail h2 {
+  font-size: 1.05rem; text-transform: uppercase; letter-spacing: 0.06em;
+  color: var(--muted); margin: 2rem 0 0.6rem;
+}
+.detail p { color: var(--text); }
+.detail .tags { margin-top: 0.8rem; }
+
+.work-list { display: flex; flex-direction: column; gap: 1rem; }
+.work-item {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 14px; padding: 1.3rem 1.4rem;
+  border-left: 3px solid var(--accent);
+}
+.work-item .work-head { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; flex-wrap: wrap; }
+.work-item h3 { font-size: 1.2rem; margin: 0; }
+.metric {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.82rem; font-weight: 600; white-space: nowrap;
+  color: var(--accent); background: var(--accent-soft);
+  border-radius: 999px; padding: 0.2rem 0.7rem;
+}
+.work-role { color: var(--text); font-weight: 500; font-size: 0.92rem; margin: 0.35rem 0 0.6rem; }
+.work-item p { color: var(--muted); font-size: 0.94rem; margin: 0 0 0.7rem; }
+.work-detail { border-top: 1px solid var(--border); padding-top: 0.7rem; }
+.work-item .tags { margin-top: 0.2rem; }
+
+.about-cols { display: grid; grid-template-columns: 1.2fr 1fr; gap: 2.5rem; }
+.about-prose p { margin: 0 0 1rem; color: var(--muted); }
+.about-prose p:first-child { color: var(--text); }
+
+.timeline { list-style: none; margin: 0; padding: 0; border-left: 2px solid var(--border); }
+.timeline li { position: relative; padding: 0 0 1.6rem 1.4rem; }
+.timeline li::before {
+  content: ''; position: absolute; left: -7px; top: 0.35rem;
+  width: 12px; height: 12px; border-radius: 50%;
+  background: var(--bg); border: 2.5px solid var(--accent);
+}
+.t-role { font-weight: 650; }
+.t-period { font-size: 0.85rem; color: var(--accent); font-family: ui-monospace, monospace; margin: 0.1rem 0 0.3rem; }
+.timeline p { color: var(--muted); font-size: 0.92rem; margin: 0; }
+
+.skills { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.4rem; margin-top: 2.2rem; }
+.skill-group h4 { color: var(--muted); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.06em; }
+.tags { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-top: 0.5rem; }
+.tag {
+  font-size: 0.82rem; padding: 0.18rem 0.65rem; border-radius: 999px;
+  background: var(--bg-soft); border: 1px solid var(--border); color: var(--text);
+}
+
+/* Page header used on the standalone /projects and /work list pages. */
+.page-head { padding-top: 6rem; }
+.page-head .back { display: inline-block; font-size: 0.9rem; margin-bottom: 1rem; }
+
+.contact { padding-bottom: 4rem; }
+.contact p { color: var(--muted); max-width: 40rem; }
+
+footer {
+  border-top: 1px solid var(--border);
+  text-align: center; color: var(--muted); font-size: 0.85rem;
+  padding: 1.6rem 0;
+}
+
+@media (max-width: 760px) {
+  .featured-card, .about-cols { grid-template-columns: 1fr; }
+  .nav-links { gap: 0.9rem; }
+  .nav-links a:not(:last-child) { display: none; }
+  section { padding-top: 3.2rem; }
+  .hero, .page-head { padding-top: 3.5rem; }
+}

@@ -1,0 +1,14 @@
+---
+// A professional-work tile. The whole tile is an internal link to the
+// /work/<slug> detail page — one-liner headline + metric badge only.
+const { item: w } = Astro.props;
+---
+
+<a class="work-card" href={`/work/${w.slug}`} aria-label={`Read about ${w.name}`}>
+  <div class="work-head">
+    <h3>{w.name}</h3>
+    {w.metric && <span class="metric">{w.metric}</span>}
+  </div>
+  <p class="one-liner">{w.oneLiner}</p>
+  <span class="more">Read more →</span>
+</a>
