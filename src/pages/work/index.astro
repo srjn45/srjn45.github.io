@@ -1,0 +1,24 @@
+---
+import Base from '../../layouts/Base.astro';
+import WorkTile from '../../components/WorkTile.astro';
+import { profile, work } from '../../data/content.js';
+---
+
+<Base
+  title={`Professional work — ${profile.name}`}
+  description="Systems I've owned at consumer scale — the problem, my role, and what shipped."
+>
+  <main>
+    <section class="page-head">
+      <a class="back" href="/#experience">← Back to home</a>
+      <h1><span class="accent">/</span> Professional work</h1>
+      <p class="section-sub">
+        Systems I've owned at consumer scale — the headline result on each; open one for the
+        full problem, my role, and what shipped.
+      </p>
+      <div class="work-grid">
+        {work.map((w) => <WorkTile item={w} />)}
+      </div>
+    </section>
+  </main>
+</Base>
