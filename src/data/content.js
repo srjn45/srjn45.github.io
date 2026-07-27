@@ -70,6 +70,13 @@ export const projects = [
     github: 'https://github.com/srjn45/kept',
     site: 'https://srjn45.github.io/kept/',
   },
+  {
+    name: 'RDQ',
+    desc: 'Retry Dead Letter Queue — automatically retries and manages failed messages from a dead letter queue.',
+    lang: 'Go',
+    github: 'https://github.com/srjn45/rdq',
+    site: 'https://srjn45.github.io/rdq/',
+  },
 ];
 
 // Professional work — problem-and-impact focused. Each entry names my role and
