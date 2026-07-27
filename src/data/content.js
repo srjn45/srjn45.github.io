@@ -156,6 +156,12 @@ export const productBlogs = [
     blog: 'https://srjn45.github.io/warden/blog/',
     rss: 'https://srjn45.github.io/warden/blog/rss.xml',
   },
+  {
+    product: 'scriva',
+    label: 'ScrivaDB',
+    blog: 'https://srjn45.github.io/scriva/blog/',
+    rss: 'https://srjn45.github.io/scriva/blog/rss.xml',
+  },
 ];
 
 export const skills = [
