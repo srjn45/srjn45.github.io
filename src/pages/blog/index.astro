@@ -1,0 +1,170 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { profile, productBlogs } from '../../data/content.js';
+
+// My own posts, rendered statically (crawlable) and seeded into the list. Product
+// posts are merged in client-side from the RSS feeds below.
+const localPosts = (await getCollection('blog'))
+  .filter((p) => !p.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const fmt = (d) =>
+  d.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+---
+
+<Base
+  title={`Blog — ${profile.name}`}
+  description="Writing on backend systems, developer tooling, and AI agents — plus posts pulled in from my product sites."
+>
+  <main>
+    <section class="page-head">
+      <h1><span class="accent">/</span> Blog</h1>
+      <p class="section-sub">
+        One stream — general writing from me, merged with posts from each product I ship.
+        Product posts open on their own site; the general ones live here.
+      </p>
+
+      <!-- Unified list. Local posts are server-rendered (crawlable); product posts are
+           inserted here client-side, sorted into place by date. -->
+      <ul class="post-list" id="post-list">
+        {localPosts.map((p) => (
+          <li class="post-card" data-date={p.data.date.toISOString()}>
+            <a class="post-card-link" href={`/blog/${p.id}`} aria-label={`Read ${p.data.title}`}></a>
+            <div class="post-head">
+              <h3>{p.data.title}</h3>
+              <span class="source">general</span>
+            </div>
+            <p class="post-date">{fmt(p.data.date)}</p>
+            <p class="post-summary">{p.data.description}</p>
+            {p.data.tags.length > 0 && (
+              <div class="tags">{p.data.tags.map((t) => <span class="tag">{t}</span>)}</div>
+            )}
+          </li>
+        ))}
+      </ul>
+
+      <!-- Static, crawlable links to every product blog. Also the no-JS fallback:
+           if the client-side merge never runs, these still let readers and crawlers
+           reach each product's posts. -->
+      <div class="product-blogs">
+        <h2>Product blogs</h2>
+        <p class="section-sub">Each product keeps its own blog — browse them directly:</p>
+        <ul class="product-blog-links">
+          {productBlogs.map((b) => (
+            <li>
+              <a href={b.blog} rel="noopener">{b.label} blog ↗</a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <script define:vars={{ feeds: productBlogs }}>
+    // Pull each product's RSS feed (same-origin under srjn45.github.io, so no CORS),
+    // build a card per post, and merge everything into #post-list sorted by date.
+    // Wrapped in an async IIFE: define:vars emits an inline classic script, where
+    // top-level await is a syntax error.
+    (async () => {
+    const list = document.getElementById('post-list');
+
+    const status = document.createElement('p');
+    status.className = 'feed-status';
+    status.textContent = 'Loading product posts…';
+    list.after(status);
+
+    const fmtDate = (d) =>
+      d.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+
+    function makeCard({ title, link, date, summary, tags, source }) {
+      const li = document.createElement('li');
+      li.className = 'post-card';
+      li.dataset.date = date.toISOString();
+
+      const a = document.createElement('a');
+      a.className = 'post-card-link';
+      a.href = link;
+      a.target = '_blank';
+      a.rel = 'noopener';
+      a.setAttribute('aria-label', `Read ${title}`);
+      li.appendChild(a);
+
+      const head = document.createElement('div');
+      head.className = 'post-head';
+      const h3 = document.createElement('h3');
+      h3.textContent = title;
+      const badge = document.createElement('span');
+      badge.className = 'source';
+      badge.textContent = source;
+      head.append(h3, badge);
+      li.appendChild(head);
+
+      const dateEl = document.createElement('p');
+      dateEl.className = 'post-date';
+      dateEl.textContent = fmtDate(date);
+      li.appendChild(dateEl);
+
+      if (summary) {
+        const p = document.createElement('p');
+        p.className = 'post-summary';
+        p.textContent = summary;
+        li.appendChild(p);
+      }
+
+      if (tags.length) {
+        const tagWrap = document.createElement('div');
+        tagWrap.className = 'tags';
+        for (const t of tags) {
+          const span = document.createElement('span');
+          span.className = 'tag';
+          span.textContent = t;
+          tagWrap.appendChild(span);
+        }
+        li.appendChild(tagWrap);
+      }
+      return li;
+    }
+
+    async function loadFeed(feed) {
+      const res = await fetch(feed.rss, { cache: 'no-cache' });
+      if (!res.ok) throw new Error(`${feed.rss} -> ${res.status}`);
+      const xml = new DOMParser().parseFromString(await res.text(), 'application/xml');
+      if (xml.querySelector('parsererror')) throw new Error(`invalid feed: ${feed.rss}`);
+      return [...xml.querySelectorAll('item')].map((item) => {
+        const get = (sel) => item.querySelector(sel)?.textContent?.trim() ?? '';
+        return {
+          title: get('title'),
+          link: get('link'),
+          date: new Date(get('pubDate')),
+          summary: get('description'),
+          tags: [...item.querySelectorAll('category')].map((c) => c.textContent.trim()),
+          source: feed.label,
+        };
+      });
+    }
+
+    const results = await Promise.allSettled(feeds.map(loadFeed));
+    const remote = results
+      .filter((r) => r.status === 'fulfilled')
+      .flatMap((r) => r.value)
+      .filter((p) => p.title && p.link && !isNaN(p.date));
+
+    for (const post of remote) list.appendChild(makeCard(post));
+
+    // Re-sort the whole list (local + remote) newest-first.
+    [...list.children]
+      .sort((a, b) => new Date(b.dataset.date) - new Date(a.dataset.date))
+      .forEach((li) => list.appendChild(li));
+
+    const failed = results.filter((r) => r.status === 'rejected').length;
+    status.remove();
+    if (failed && !remote.length) {
+      const note = document.createElement('p');
+      note.className = 'feed-status';
+      note.textContent = 'Couldn’t load product posts right now — browse them via the product blog links below.';
+      list.after(note);
+    }
+    })();
+  </script>
+</Base>
