@@ -164,7 +164,7 @@ export const productBlogs = [
     rss: 'https://srjn45.github.io/warden/blog/rss.xml',
   },
   {
-    product: 'scriva',
+    product: 'scrivadb',
     label: 'ScrivaDB',
     blog: 'https://srjn45.github.io/scriva/blog/',
     rss: 'https://srjn45.github.io/scriva/blog/rss.xml',
