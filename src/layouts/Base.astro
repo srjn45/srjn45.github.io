@@ -1,8 +1,13 @@
 ---
 // Shared shell for every page — head, nav, footer, and global styles.
 // Pass `title`/`description` to override the defaults for a specific page.
-import { profile } from '../data/content.js';
+import { profile, projects, productBlogs } from '../data/content.js';
 import '../styles/global.css';
+
+// Sitewide footer links to every product site (crawlable paths from any page),
+// plus a direct blog link for products that publish one.
+const productSites = projects.filter((p) => p.site);
+const blogByName = new Map(productBlogs.map((b) => [b.product.toLowerCase(), b]));
 
 const {
   title = `${profile.name} — ${profile.role}`,
@@ -31,6 +36,7 @@ const {
       <div class="nav-links">
         <a href="/#featured">Work</a>
         <a href="/#projects">Projects</a>
+        <a href="/blog">Blog</a>
         <a href="/#about">About</a>
         <a href="/#experience">Experience</a>
         <a href="/#contact">Contact</a>
@@ -41,6 +47,17 @@ const {
     <slot />
 
     <footer>
+      <nav class="footer-products" aria-label="Products">
+        {productSites.map((p) => {
+          const blog = blogByName.get(p.name.toLowerCase());
+          return (
+            <span class="footer-product">
+              <a href={p.site} rel="noopener">{p.name}</a>
+              {blog && <a class="footer-blog" href={blog.blog} rel="noopener">blog</a>}
+            </span>
+          );
+        })}
+      </nav>
       <p>© {new Date().getFullYear()} {profile.name} · Built with Astro · <a href="https://github.com/srjn45/srjn45.github.io" target="_blank" rel="noopener">source</a></p>
     </footer>
   </body>

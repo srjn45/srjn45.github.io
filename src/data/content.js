@@ -5,7 +5,7 @@ export const profile = {
   name: 'Srajan Pathak',
   role: 'Staff Software Engineer',
   tagline:
-    'Ten+ years building backend systems — and lately, the tooling for running fleets of AI coding agents.',
+    '10+ years building backend systems — and lately, the tooling for running fleets of AI coding agents.',
   github: 'https://github.com/srjn45',
   linkedin: 'https://www.linkedin.com/in/srajan-pathak-9938b055',
   email: 'srajanpathak45@gmail.com',
@@ -142,6 +142,19 @@ export const career = [
     role: 'Software Engineer · Infobeans',
     period: '2015 — 2018',
     desc: 'Java platform work — from a PCI-DSS-certified loyalty processing engine for POS systems to cross-platform mobile apps.',
+  },
+];
+
+// Product sites that publish their own blog. Drives the /blog page's client-side
+// feed aggregation and the static, crawlable "Product blogs" links. All feeds are
+// under srjn45.github.io, so the browser fetch is same-origin (no CORS). Add an
+// entry here when a product gains a blog.
+export const productBlogs = [
+  {
+    product: 'warden',
+    label: 'warden',
+    blog: 'https://srjn45.github.io/warden/blog/',
+    rss: 'https://srjn45.github.io/warden/blog/rss.xml',
   },
 ];
 
