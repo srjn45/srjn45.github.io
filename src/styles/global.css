@@ -103,6 +103,12 @@ h2 { font-size: 1.6rem; margin-bottom: 1.2rem; }
 .featured-media img {
   width: 100%; border-radius: 10px; border: 1px solid var(--border); display: block;
 }
+.featured-mark {
+  display: flex; align-items: center; justify-content: center;
+  padding: 2.4rem 2rem; border-radius: 10px; border: 1px solid var(--border);
+  background: var(--bg-soft); color: var(--text);
+}
+.featured-mark svg { width: 100%; max-width: 300px; height: auto; display: block; }
 .featured-body h3 {
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
   font-size: 1.5rem; color: var(--accent);

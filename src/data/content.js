@@ -12,16 +12,19 @@ export const profile = {
 };
 
 export const featured = {
-  name: 'warden',
-  gif: 'https://srjn45.github.io/warden/media/hero.gif',
-  tagline: 'Run a fleet of AI coding agents from one cockpit.',
+  name: 'wdx',
+  // The mark is inlined from src/assets/wdx-mark.svg (copied from the wdx repo's
+  // assets/brand) so it takes the page's text colour in both themes.
+  markAlt: 'wdx: warden, to the power of x',
+  tagline: 'Run a team of AI coding agents from one terminal.',
   desc:
-    'A single Go binary that spawns, monitors, and tears down coding agents — each in an isolated git worktree — with real dollar cost tracking, a tmux TUI + embedded web dashboard, and MCP tools so one agent can orchestrate the rest. Self-hosted, no database, no telemetry.',
-  tags: ['Go', 'MCP', 'tmux', 'Astro', 'self-hosted'],
+    'A daemon keeps Claude Code, Codex, Cursor and Antigravity agents running, each in its own terminal and often its own git worktree. Drive them from TIDE, its Terminal IDE, or from a CLI whose --json output is built for scripts and for agents orchestrating agents. The next generation of warden.',
+  tags: ['Go', 'CLI', 'TIDE', 'git worktrees', 'Claude Code · Codex · Cursor'],
   links: [
-    { label: 'GitHub', url: 'https://github.com/srjn45/warden' },
-    { label: 'Docs', url: 'https://srjn45.github.io/warden/' },
-    { label: 'Why I built it', url: 'https://srjn45.github.io/warden/blog/running-a-fleet-of-claude-code-agents/' },
+    { label: 'GitHub', url: 'https://github.com/srjn45/wdx' },
+    { label: 'Docs', url: 'https://srjn45.github.io/wdx/' },
+    { label: 'Install', url: 'https://srjn45.github.io/wdx/docs/start/install/' },
+    { label: 'Why I built it', url: 'https://srjn45.github.io/wdx/blog/introducing-wdx/' },
   ],
 };
 
@@ -29,11 +32,11 @@ export const featured = {
 // A GitHub button in the bottom-right corner always opens `github`.
 export const projects = [
   {
-    name: 'Warden',
-    desc: 'Run a fleet of AI coding agents from one cockpit — a single Go binary that spawns, monitors, and tears them down in isolated git worktrees.',
+    name: 'wdx',
+    desc: 'Run a team of AI coding agents from one terminal — a daemon keeps Claude Code, Codex, Cursor and Antigravity running in their own terminals and git worktrees, with TIDE, a Terminal IDE, and a --json CLI. The successor of warden.',
     lang: 'Go',
-    github: 'https://github.com/srjn45/warden',
-    site: 'https://srjn45.github.io/warden/',
+    github: 'https://github.com/srjn45/wdx',
+    site: 'https://srjn45.github.io/wdx/',
   },
   {
     name: 'spaiSH',
@@ -157,6 +160,12 @@ export const career = [
 // under srjn45.github.io, so the browser fetch is same-origin (no CORS). Add an
 // entry here when a product gains a blog.
 export const productBlogs = [
+  {
+    product: 'wdx',
+    label: 'wdx',
+    blog: 'https://srjn45.github.io/wdx/blog/',
+    rss: 'https://srjn45.github.io/wdx/blog/rss.xml',
+  },
   {
     product: 'warden',
     label: 'warden',
